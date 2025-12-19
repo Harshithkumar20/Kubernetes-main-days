@@ -1,0 +1,28 @@
+#https://medium.com/@veerababu.narni232/a-complete-overview-of-argocd-with-a-practical-example-f4a9a8488cf9 ---reference 
+
+#Create the namespace for argoCD
+
+kubectl create namespace argocd
+#Install ArgoCD using the below command
+
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+#After installing the ArgoCD, you can run the below command to check what resources it has created.
+
+kubectl get all -n argocd
+
+# Now in order to access the UI of ArgoCD, you need to run the below command
+kubectl edit svc argocd-server -n argocd  #enable Node Port 
+
+#Now, in order to log into the UI you need the credentials. So, for a username, you can write admin and the password is stored in the secret called argocd-initial-admin-secret in the cluster.
+You need to run the below command to get the value of the secret.
+
+kubectl get secret argocd-initial-admin-secret -n argocd -o yaml
+
+#The secret base64 encoded so, you have to decode the secret by running the below command.
+
+echo "secret value" | base64 --decode
+
+
+#After running the above command you can have the decoded value of the secret and using that as a password you can log in to the UI.
+Now, the installation has been completed.
