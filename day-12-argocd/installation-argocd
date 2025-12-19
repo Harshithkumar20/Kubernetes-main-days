@@ -14,6 +14,9 @@ kubectl get all -n argocd
 # Now in order to access the UI of ArgoCD, you need to run the below command
 kubectl edit svc argocd-server -n argocd  #enable Node Port 
 
+
+kubectl get svc -n argocd
+
 #Now, in order to log into the UI you need the credentials. So, for a username, you can write admin and the password is stored in the secret called argocd-initial-admin-secret in the cluster.
 You need to run the below command to get the value of the secret.
 
